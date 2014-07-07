@@ -1,0 +1,198 @@
+" Vundle setup
+set nocompatible
+filetype on
+filetype off
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" Bundles
+Bundle 'gmarik/vundle'
+Bundle 'flazz/vim-colorschemes'
+Bundle 'altercation/vim-colors-solarized'
+Bundle "kien/ctrlp.vim"
+Bundle 'nvie/vim-togglemouse'
+Bundle 'tomtom/tcomment_vim'
+Bundle 'cakebaker/scss-syntax.vim'
+Bundle 'mattn/emmet-vim'
+Bundle 'Raimondi/delimitMate'
+Bundle 'tpope/vim-surround'
+Bundle 'othree/html5.vim'
+Bundle 'octol/vim-cpp-enhanced-highlight'
+Bundle 'Lokaltog/powerline'
+Bundle 'gregsexton/MatchTag'
+Bundle 'pangloss/vim-javascript'
+Bundle 'airblade/vim-gitgutter'
+Bundle 'klen/python-mode'
+Bundle 'hynek/vim-python-pep8-indent'
+
+ " Apparently necessary for powerline
+set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+
+if $TERM == "xterm-256color"
+    set t_Co=256
+endif
+
+" Set filetype-specific commands
+if has("autocmd")
+    au BufRead,BufNewFile *.jinja2 set filetype=html
+    au BufRead,BufNewFile *.jinja2 nnoremap <leader>s :wa<CR>:!./template.py<CR>
+    au BufRead,BufNewFile *.c nnoremap <leader>s :wa<CR>:!make<CR>
+    au BufRead,BufNewFile *.pde set filetype=c
+    au BufRead,BufNewFile *.c.txt set filetype=c
+    au BufRead,BufNewFile *.tex nnoremap <leader>s :w<CR>:!tex_to_pdf<CR><CR>
+    autocmd! BufReadPost,BufNewFile * call SetupEnvironment()
+    autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+endif
+
+" Set colorscheme
+if has("gui_running")
+    set guifont=Monaco:h12
+    set background=light
+    colorscheme solarized
+    set guicursor+=a:blinkon0
+else
+    " let g:solarized_termcolors=256
+    let g:solarized_visibility = "high"
+    let g:solarized_contrast = "high"
+    set background=light
+    colorscheme solarized
+endif
+
+highlight link GitGutterAdd DiffAdd
+highlight link GitGutterDelete DiffDelete
+highlight link GitGutterChange DiffChange
+highlight link GitGutterChangeDelete DiffDelete
+
+" Window swap setup
+function! MarkWindowSwap()
+    let g:markedWinNum = winnr()
+endfunction
+
+function! DoWindowSwap()
+    "Mark destination
+    let curNum = winnr()
+    let curBuf = bufnr( "%" )
+    exe g:markedWinNum . "wincmd w"
+    "Switch to source and shuffle dest->source
+    let markedBuf = bufnr( "%" )
+    "Hide and open so that we aren't prompted and keep history
+    exe 'hide buf' curBuf
+    "Switch to dest and shuffle source->dest
+    exe curNum . "wincmd w"
+    "Hide and open so that we aren't prompted and keep history
+    exe 'hide buf' markedBuf 
+endfunction
+
+" Set cursor shape
+if &term=~"^xterm"
+    let &t_SI .= "\<Esc>]50;CursorShape=1\x7"
+    let &t_EI .= "\<Esc>]50;CursorShape=0\x7"
+endif
+
+let mapleader=","
+nnoremap ; :
+syntax on
+
+set showmatch		" Show matching brackets.
+set ignorecase		" Do case insensitive matching
+set smartcase      " Do smart case matching
+set incsearch		" Incremental search
+set hidden             " Hide buffers when they are abandoned
+set backspace=indent,eol,start
+set expandtab
+set shiftwidth=4
+set softtabstop=4
+set tabstop=4
+set autoindent
+set copyindent
+set number
+set shiftround " (un)indent to nearest tabstop
+set mouse=a
+set history=1000
+set undolevels=1000
+set wildignore=*.cmi,*.cmo,*.mid,*.pyo,*.pyc,*.ctxt,*.jar,*.jpg,*.jpeg,*.png
+set wildignore+=*.gif,*.tiff,*.o,*/data/*
+set title
+set visualbell
+set noerrorbells
+set nobackup
+set pastetoggle=<F2>
+set colorcolumn=80 " Colored column at 80 chars
+set laststatus=2
+set foldmethod=syntax
+set nofoldenable
+
+" Source a global configuration file if available
+if filereadable("/etc/vim/vimrc.local")
+  source /etc/vim/vimrc.local
+endif
+
+
+nnoremap <leader><leader> $
+nnoremap <leader>wl <c-w>l 
+nnoremap <leader>wh <c-w>h 
+nnoremap <leader>wj <c-w>j 
+nnoremap <leader>wk <c-w>k 
+nnoremap <leader>we <c-w>= 
+inoremap <leader>n <c-n>
+nnoremap <silent> <leader>mw :call MarkWindowSwap()<CR>
+nnoremap <silent> <leader>pw :call DoWindowSwap()<CR>
+nnoremap <leader>j o<Esc>
+nnoremap <leader>J O<Esc>
+nnoremap <leader>x /.\{80,}<CR>
+
+" Ctrl-P options
+nnoremap <leader>b :CtrlPBuffer<CR>
+let g:ctrlp_map = '<leader>t'
+let g:ctrlp_prompt_mappings = {
+    \ 'AcceptSelection("e")': ['<c-t>'],
+    \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
+    \ }
+let g:ctrlp_custom_ignore = {
+    \ 'dir': '*/scraper/data',
+    \ }
+let g:ctrlp_cmd = 'CtrlPMixed'
+
+" Emmet options
+let g:user_emmet_expandabbr_key = '<leader>f'
+
+"pymode options
+let g:pymode_indent = 0
+let g:pymode_syntax_space_errors = 0
+let g:pymode_lint_ignore = ""
+let g:pymode_rope_complete_on_dot = 0
+let g:pymode_trim_whitespaces = 0
+
+" Copy/paste to/from clipboard
+function! s:FuckingCopyTheTextPlease() " {{{2
+  let old_z = @z
+  normal! gv"zy
+  call system('pbcopy', @z)
+  let @z = old_z
+endfunction " }}}2
+
+noremap <leader>p :silent! set paste<CR>"*p:set nopaste<CR>
+vnoremap <silent> <leader>y :<c-u>call <SID>FuckingCopyTheTextPlease()<cr>
+
+highlight MatchParen cterm=underline,bold ctermbg=none ctermfg=none
+
+match Error "[^\x00-\x7F]"
+highlight Error ctermbg=126 ctermfg=White
+
+filetype plugin indent on
+
+function! SetupEnvironment()
+  let l:path = expand('%:p')
+  if l:path =~ '/Users/joshpalay/Desktop/work/cs171'
+      setlocal tabstop=2 shiftwidth=2 softtabstop=2
+  endif
+endfunction
+
+function! CursorPing()
+    set cursorline cursorcolumn
+    redraw
+    sleep 50m
+    set nocursorline nocursorcolumn
+endfunction
+
+nmap <C-Space> :call CursorPing()<CR>

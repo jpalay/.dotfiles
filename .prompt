@@ -1,0 +1,63 @@
+source /usr/local/etc/bash_completion.d/git-prompt.sh
+PROMPT_COMMAND=__generate_prompt
+
+__generate_prompt() {
+  # Undocumented function that updates OS X Terminal\'s knowledge of the current
+  # working directory. Required for Cmd + T to open a new tab in the same
+  # directory.
+  #
+  # See '/etc/bashrc' on an OS X box for details.
+  if [[ $TERM_PROGRAM == "Apple_Terminal" ]]; then
+    update_terminal_cwd
+    parent_dir=$(basename `dirname $PWD`)
+    dir=${PWD##*/}
+    tabname "$parent_dir/$dir"
+  fi
+
+  # ==> Configure Git prompt
+  local GIT_PS1_SHOWCOLORHINTS=1
+  local GIT_PS1_SHOWDIRTYSTATE=1
+  local GIT_PS1_SHOWSTASHSTATE=1
+  local GIT_PS1_SHOWUNTRACKEDFILES=1
+  local GIT_PS1_SHOWUPSTREAM="auto verbose"
+
+  # ==> Display Python virtual environment when active
+  if [[ "${VIRTUAL_ENV}" ]]; then
+    local PS1_VENV="$(color "({purple}$(basename "${VIRTUAL_ENV}"){clear})") "
+  fi
+
+  # ==> Colorize pre/post Git status strings.
+  # Set `$PS1_HOOK` to add additional text to the prompt.
+  local PS1_PRE="$(color "\n[{bold}{purple}\w{clear}] ${PS1_VENV}${PS1_HOOK}")"
+  local PS1_POST="$(color "\n{cyan}\u{clear}@{bold}\h{clear}$ ")"
+
+  __git_ps1 "${PS1_PRE}" "${PS1_POST}"
+}
+
+_format_codes=(
+  clear                  # reset
+  black red green yellow # colors
+  blue purple cyan white
+  bold dim               # bold/bright, unbold/dim
+  rev                    # reverse video
+  under nounder          # underline, nounderline
+)
+
+_format_escapes=(
+  "$(tput sgr0)"
+  "$(tput setaf 0)" "$(tput setaf 1)" "$(tput setaf 2)" "$(tput setaf 3)"
+  "$(tput setaf 4)" "$(tput setaf 5)" "$(tput setaf 6)" "$(tput setaf 7)"
+  "$(tput bold)" "$(tput dim)"
+  "$(tput rev)"
+  "$(tput smul)" "$(tput rmul)"
+)
+
+color() {
+  local strings="$@" match replace
+  for (( i=0; i < ${#_format_codes[@]}; ++i )); do
+    match="{${_format_codes[i]}}"
+    replace="\[${_format_escapes[i]}\]"
+    strings=${strings//${match}/${replace}}
+  done
+  echo "${strings[@]}"
+}
