@@ -21,9 +21,9 @@ Bundle 'octol/vim-cpp-enhanced-highlight'
 Bundle 'Lokaltog/powerline'
 Bundle 'gregsexton/MatchTag'
 Bundle 'pangloss/vim-javascript'
-Bundle 'airblade/vim-gitgutter'
 Bundle 'klen/python-mode'
 Bundle 'hynek/vim-python-pep8-indent'
+Bundle 'airblade/vim-gitgutter'
 
  " Apparently necessary for powerline
 set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
@@ -40,16 +40,21 @@ if has("autocmd")
     au BufRead,BufNewFile *.pde set filetype=c
     au BufRead,BufNewFile *.c.txt set filetype=c
     au BufRead,BufNewFile *.tex nnoremap <leader>s :w<CR>:!tex_to_pdf<CR><CR>
+    autocmd BufWritePost .vimrc nested source % " auto reload .vimrc
     autocmd! BufReadPost,BufNewFile * call SetupEnvironment()
     autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
 endif
 
 " Set colorscheme
 if has("gui_running")
-    set guifont=Monaco:h12
+    set guifont=Monaco:h10
     set background=light
     colorscheme solarized
     set guicursor+=a:blinkon0
+    " Remove left scrollbar on vspilt window
+    set go-=L
+    " Remove right scrollbar
+    set guioptions-=r
 else
     " let g:solarized_termcolors=256
     let g:solarized_visibility = "high"
@@ -135,8 +140,8 @@ nnoremap <leader>wj <c-w>j
 nnoremap <leader>wk <c-w>k 
 nnoremap <leader>we <c-w>= 
 inoremap <leader>n <c-n>
-nnoremap <silent> <leader>mw :call MarkWindowSwap()<CR>
-nnoremap <silent> <leader>pw :call DoWindowSwap()<CR>
+nnoremap <silent> <leader>wy :call MarkWindowSwap()<CR>
+nnoremap <silent> <leader>wp :call DoWindowSwap()<CR>
 nnoremap <leader>j o<Esc>
 nnoremap <leader>J O<Esc>
 nnoremap <leader>x /.\{80,}<CR>
@@ -159,9 +164,12 @@ let g:user_emmet_expandabbr_key = '<leader>f'
 "pymode options
 let g:pymode_indent = 0
 let g:pymode_syntax_space_errors = 0
-let g:pymode_lint_ignore = ""
 let g:pymode_rope_complete_on_dot = 0
 let g:pymode_trim_whitespaces = 0
+" E731 - do not assign a lambda expression, use a def
+" E309 - blank line below class definitions
+let g:pymode_lint_ignore = "E731,E309,"
+nnoremap <leader>l :PymodeLint<CR>
 
 " Copy/paste to/from clipboard
 function! s:FuckingCopyTheTextPlease() " {{{2
@@ -196,3 +204,5 @@ function! CursorPing()
 endfunction
 
 nmap <C-Space> :call CursorPing()<CR>
+
+
