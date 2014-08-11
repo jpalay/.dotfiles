@@ -40,14 +40,13 @@ if has("autocmd")
     au BufRead,BufNewFile *.pde set filetype=c
     au BufRead,BufNewFile *.c.txt set filetype=c
     au BufRead,BufNewFile *.tex nnoremap <leader>s :w<CR>:!tex_to_pdf<CR><CR>
-    autocmd BufWritePost .vimrc nested source % " auto reload .vimrc
     autocmd! BufReadPost,BufNewFile * call SetupEnvironment()
     autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
 endif
 
 " Set colorscheme
 if has("gui_running")
-    set guifont=Monaco:h10
+    set guifont=Consolas:h11
     set background=light
     colorscheme solarized
     set guicursor+=a:blinkon0
@@ -144,7 +143,7 @@ nnoremap <silent> <leader>wy :call MarkWindowSwap()<CR>
 nnoremap <silent> <leader>wp :call DoWindowSwap()<CR>
 nnoremap <leader>j o<Esc>
 nnoremap <leader>J O<Esc>
-nnoremap <leader>x /.\{80,}<CR>
+nnoremap <leader>x /.\{81,}<CR>
 
 " Ctrl-P options
 nnoremap <leader>b :CtrlPBuffer<CR>
@@ -205,4 +204,15 @@ endfunction
 
 nmap <C-Space> :call CursorPing()<CR>
 
+let g:is_purple = 0
+function! TogglePurple()
+    if g:is_purple
+        set background=light
+        let g:is_purple = 0
+    else
+        highlight Normal guibg=MediumOrchid1
+        let g:is_purple = 1
+    endif
+endfunction
+command Purple call TogglePurple()
 
