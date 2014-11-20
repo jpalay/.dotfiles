@@ -9,15 +9,9 @@ source ~/.prompt
 
 export PYTHONSTARTUP="$HOME/.pyrc"
 
-export WORKON_HOME=~/venvs
-source /usr/local/bin/virtualenvwrapper.sh
-
 export CFLAGS=-Qunused-arguments
 export CPPFLAGS=-Qunused-arguments
 
-# MACPORTS ADDITIONS
-export PATH=/opt/local/bin:/opt/local/sbin:$PATH
-export PATH="/opt/local/libexec/gnubin:$PATH"
 export PATH="~/bin:$PATH"
 
 # BASH_COMPLETION ADDITIONS
