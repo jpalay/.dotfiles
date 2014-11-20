@@ -6,10 +6,10 @@ alias qwerty="echo \"LOL qwerty sux\""
 alias asdf=qwerty
 
 # virtualenv
-alias mkvenv='mkvirtualenv'
-alias lsvenv='lsvirtualenv | grep -v ^=*$'
-alias rmvenv='rmvirtualenv'
-alias activate='workon'
+# alias mkvenv='mkvirtualenv'
+# alias lsvenv='lsvirtualenv | grep -v ^=*$'
+# alias rmvenv='rmvirtualenv'
+alias activate='source activate'
 
 # programs
 alias del="rmtrash"
