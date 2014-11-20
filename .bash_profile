@@ -1,6 +1,6 @@
 source ~/etc/activate-completion.bash
 source ~/etc/git-completion.bash
-source ~/.functions
+source ~/.functions.bash
 source ~/.aliases
 source ~/.prompt
 

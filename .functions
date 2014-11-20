@@ -1,9 +1,0 @@
-function mcd () { 
-    mkdir -p "$@" && eval cd "\"\$$#\""; 
-}
-
-function tabname {
-    printf "\e]1;$1\a"
-}
-
-function my { mysql --defaults-group-suffix=$@; }
