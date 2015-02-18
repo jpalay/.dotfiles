@@ -11,7 +11,6 @@ __generate_prompt() {
     update_terminal_cwd
     parent_dir=$(basename `dirname $PWD`)
     dir=${PWD##*/}
-    tabname "$parent_dir/$dir"
   fi
 
   # ==> Configure Git prompt
