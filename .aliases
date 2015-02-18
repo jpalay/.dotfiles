@@ -5,41 +5,17 @@ alias aoeu=aoeuhtns
 alias qwerty="echo \"LOL qwerty sux\""
 alias asdf=qwerty
 
-# virtualenv
-# alias mkvenv='mkvirtualenv'
-# alias lsvenv='lsvirtualenv | grep -v ^=*$'
-# alias rmvenv='rmvirtualenv'
-alias activate='source activate'
-
 # programs
 alias del="rmtrash"
 alias vmi="vim"
-alias mivm="mvim"
 alias chr="open -a /Applications/Google\ Chrome.app"
 alias grep="egrep"
 
-# set tabnames
-alias vim="tabname vim && vim"
-alias ssh="tabname ssh && ssh"
-alias mosh="tabname mosh && mosh"
-alias python="tabname python && python"
-alias ipython="tabname ipython && ipython"
-alias celery="tabname celery && celery"
-alias tail="tabname tail && tail"
-alias time="tabname time && time"
-
-# port forwarding :D
+# port forwarding :o
 alias fwd="sudo ipfw add 100 fwd 127.0.0.1,8000 tcp from any to any 80 in"
 alias phttp="python -m SimpleHTTPServer"
 alias tidy="tidy -config ~/.tidy"
 alias sbp="source ~/.bash_profile"
-
-# cd
-alias ..="cd .."
-alias ...="cd ../.."
-alias ....="cd ../../.."
-alias .....="cd ../../../.."
-alias ......="cd ../../../../.."
 
 # other
 alias ll="ls -l"
@@ -48,27 +24,9 @@ alias lla="ls -la"
 alias pc="pbcopy < "
 alias gs="git status"
 
-# Projects
-alias enoc="activate email; cd /Users/jpalay/repos/adharmonics-email/nocs/email-process-check-noc"
-alias enoc_check="ssh -t email-tools '/home/ubuntu/srv/email_noc/venv/bin/python /home/ubuntu/srv/email_noc/releases/current/check.py'"
-alias enoc_log="ssh -t email-tools 'tail -f -n 5000 /home/ubuntu/srv/email_noc/releases/current/celery.log'"
-alias nbeast="activate sigtest; cd /Users/jpalay/repos/adharmonics-email/tools/nbeast/"
-alias nbeast_log="ssh -t email-tools 'tail -f -n 5000 /home/ubuntu/srv/nbeast/releases/current/info.log'"
-alias nbeast_log_nt="ssh -t email-tools 'tail -n 5000 /home/ubuntu/srv/nbeast/releases/current/info.log'"
-alias maleui="cd /Volumes/ui/"
-alias malemod="cd /Volumes/adh_jp_home/maelstrom_modules/"
-alias male="activate maelstrom && cd /Users/jpalay/repos/maelstrom_modules/ui"
-alias male_frontend="ssh -t male 'python /home/maelstrom/maelstrom_modules/ui/frontend.py'"
-alias email="activate email2; cd /Users/jpalay/repos/adharmonics-email/scripts/adaptive_sending"
-
-alias mlog="ssh -t maelstrom@adh-jp 'tail -f ~/logs/maelstrom.log -n 500'" 
-alias muilog="ssh -t maelstrom@adh-jp 'tail -f ~/maelstrom_modules/ui/info.log -n 500'" 
-
-# mysql
-# alias mysqlstart='sudo whoami; sudo /opt/local/bin/mysqld_safe5 &'
-# alias mysqlstop='/opt/local/bin/mysqladmin5 -u root -p shutdown'
-# alias mysql='tabname mysql; /opt/local/lib/mysql5/bin/mysql'
-# alias mysqldump='/opt/local/lib/mysql5/bin/mysqldump'
-
 # highlighting
 alias hl="pbpaste | highlight --font=Consolas --font-size=30 --syntax=python -O rtf | pbcopy"
+
+if [[ -a ".local_aliases" ]]; then
+    source .local_aliases
+fi
