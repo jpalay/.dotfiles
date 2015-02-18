@@ -65,7 +65,10 @@ alias mlog="ssh -t maelstrom@adh-jp 'tail -f ~/logs/maelstrom.log -n 500'"
 alias muilog="ssh -t maelstrom@adh-jp 'tail -f ~/maelstrom_modules/ui/info.log -n 500'" 
 
 # mysql
-alias mysqlstart='sudo whoami; sudo /opt/local/bin/mysqld_safe5 &'
-alias mysqlstop='/opt/local/bin/mysqladmin5 -u root -p shutdown'
-alias mysql='tabname mysql; /opt/local/lib/mysql5/bin/mysql'
-alias mysqldump='/opt/local/lib/mysql5/bin/mysqldump'
+# alias mysqlstart='sudo whoami; sudo /opt/local/bin/mysqld_safe5 &'
+# alias mysqlstop='/opt/local/bin/mysqladmin5 -u root -p shutdown'
+# alias mysql='tabname mysql; /opt/local/lib/mysql5/bin/mysql'
+# alias mysqldump='/opt/local/lib/mysql5/bin/mysqldump'
+
+# highlighting
+alias hl="pbpaste | highlight --font=Consolas --font-size=30 --syntax=python -O rtf | pbcopy"
