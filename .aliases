@@ -23,6 +23,7 @@ alias la="ls -a"
 alias lla="ls -la"
 alias pc="pbcopy < "
 alias gs="git status"
+alias untar="tar -zxvf"
 
 # highlighting
 alias hl="pbpaste | highlight --font=Consolas --font-size=30 --syntax=python -O rtf | pbcopy"

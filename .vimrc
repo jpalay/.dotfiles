@@ -145,6 +145,11 @@ nnoremap <leader>j o<Esc>
 nnoremap <leader>J O<Esc>
 nnoremap <leader>x /.\{81,}<CR>
 
+" ctags
+nnoremap <leader>\ :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
+nnoremap <leader>] <C-]>
+nnoremap <leader>. :CtrlPTag<CR>
+
 " Ctrl-P options
 nnoremap <leader>b :CtrlPBuffer<CR>
 let g:ctrlp_map = '<leader>t'
@@ -167,7 +172,7 @@ let g:pymode_rope_complete_on_dot = 0
 let g:pymode_trim_whitespaces = 0
 " E731 - do not assign a lambda expression, use a def
 " E309 - blank line below class definitions
-let g:pymode_lint_ignore = "E731,E309,"
+let g:pymode_lint_ignore = "E731,E309,C901,"
 nnoremap <leader>l :PymodeLint<CR>
 
 " Copy/paste to/from clipboard
