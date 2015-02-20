@@ -28,6 +28,6 @@ alias untar="tar -zxvf"
 # highlighting
 alias hl="pbpaste | highlight --font=Consolas --font-size=30 --syntax=python -O rtf | pbcopy"
 
-if [[ -a ".local_aliases" ]]; then
-    source .local_aliases
+if [[ -a ~/.local_aliases ]]; then
+    source ~/.local_aliases
 fi
