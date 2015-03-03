@@ -24,6 +24,7 @@ alias lla="ls -la"
 alias pc="pbcopy < "
 alias gs="git status"
 alias untar="tar -zxvf"
+alias ipnb="workon ipython && cd ~/ipnbs && ipython notebook"
 
 # highlighting
 alias hl="pbpaste | highlight --font=Consolas --font-size=30 --syntax=python -O rtf | pbcopy"
