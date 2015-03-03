@@ -24,6 +24,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'klen/python-mode'
 Plugin 'hynek/vim-python-pep8-indent'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'Yggdroot/indentLine'
 
  " Apparently necessary for powerline
 set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
@@ -174,6 +175,9 @@ let g:pymode_trim_whitespaces = 0
 " E309 - blank line below class definitions
 let g:pymode_lint_ignore = "E731,E309,C901,"
 nnoremap <leader>l :PymodeLint<CR>
+
+" indentLine options
+let g:indentLine_char = '¦'
 
 " Copy/paste to/from clipboard
 function! s:FuckingCopyTheTextPlease() " {{{2
