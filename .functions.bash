@@ -26,3 +26,8 @@ function notify {
 
     osascript -e "display notification \"$msg\" with title \"$title\""
 }
+
+function echo_and_run {
+    echo "$@"
+    "$@"
+}

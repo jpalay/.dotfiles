@@ -25,6 +25,7 @@ alias pc="pbcopy < "
 alias gs="git status"
 alias untar="tar -zxvf"
 alias ipnb="workon ipython && cd ~/ipnbs && ipython notebook --pylab inline"
+alias alert="notify"
 
 # highlighting
 alias hl="pbpaste | highlight --font=Consolas --font-size=30 --syntax=python -O rtf | pbcopy"

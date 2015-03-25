@@ -6,7 +6,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#rc()
 
 " Plugins
-Plugin 'gmarik/vundle'
+Plugin 'gmarik/Vundle.vim'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'kien/ctrlp.vim'
@@ -225,3 +225,8 @@ function! TogglePurple()
 endfunction
 command Purple call TogglePurple()
 
+try 
+  source ~/.local_vimrc
+catch
+  " No such file? No problem; just ignore it.
+endtry 
