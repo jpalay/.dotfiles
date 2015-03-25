@@ -1,0 +1,9 @@
+[core]
+    editor = /usr/bin/vim
+[user]
+    name = Josh Palay
+    email = jpalay@adharmonics.com
+[alias]
+    co = checkout
+    cob = checkout -b
+    ec = config --global -e
