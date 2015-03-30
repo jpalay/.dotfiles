@@ -31,3 +31,9 @@ function echo_and_run {
     echo "$@"
     "$@"
 }
+
+function whendone() {
+    date
+    time "$@"
+    notify 'Finished task!' "$*"
+}
