@@ -31,3 +31,8 @@ function echo_and_run {
     echo "$@"
     "$@"
 }
+
+
+function hls () {
+    pbpaste | highlight --font=Consolas --font-size=30 --syntax=$1 -O rtf | pbcopy
+}
