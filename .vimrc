@@ -68,6 +68,9 @@ highlight link GitGutterDelete DiffDelete
 highlight link GitGutterChange DiffChange
 highlight link GitGutterChangeDelete DiffDelete
 
+nnoremap <leader>hn <Plug>GitGutterNextHunk
+nnoremap <leader>hN <Plug>GitGutterPrevHunk
+
 " Window swap setup
 function! MarkWindowSwap()
     let g:markedWinNum = winnr()

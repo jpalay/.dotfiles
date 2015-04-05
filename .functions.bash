@@ -32,7 +32,12 @@ function echo_and_run {
     "$@"
 }
 
-
 function hls () {
     pbpaste | highlight --font=Consolas --font-size=30 --syntax=$1 -O rtf | pbcopy
+}
+
+function whendone() {
+    date
+    time "$@"
+    notify 'Finished task!' "$*"
 }
