@@ -18,6 +18,11 @@ alias top_right_two_fifths corner top-right resize:screenSizeX*2/5;screenSizeY/2
 alias top_left_two_fifths corner top-left resize:screenSizeX*2/5;screenSizeY/2
 alias bottom_left_two_fifths corner bottom-left resize:screenSizeX*2/5;screenSizeY/2
 
+alias bottom_right_three_fifths corner bottom-right resize:screenSizeX*3/5;screenSizeY/2
+alias top_right_three_fifths corner top-right resize:screenSizeX*3/5;screenSizeY/2
+alias top_left_three_fifths corner top-left resize:screenSizeX*3/5;screenSizeY/2
+alias bottom_left_three_fifths corner bottom-left resize:screenSizeX*3/5;screenSizeY/2
+
 
 bind return:ctrl;alt;cmd ${full}
 bind up:ctrl;alt;cmd ${tophalf}
@@ -39,3 +44,8 @@ bind right:ctrl;alt;cmd;shift ${bottom_right_two_fifths}
 bind up:ctrl;alt;cmd;shift ${top_right_two_fifths}
 bind left:ctrl;alt;cmd;shift ${top_left_two_fifths}
 bind down:ctrl;alt;cmd;shift ${bottom_left_two_fifths}
+
+bind right:ctrl;shift ${bottom_right_three_fifths}
+bind up:ctrl;shift ${top_right_three_fifths}
+bind left:ctrl;shift ${top_left_three_fifths}
+bind down:ctrl;shift ${bottom_left_three_fifths}
