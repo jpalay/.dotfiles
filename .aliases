@@ -17,18 +17,27 @@ alias phttp="python -m SimpleHTTPServer"
 alias tidy="tidy -config ~/.tidy"
 alias sbp="source ~/.bash_profile"
 
-# other
+# ls
 alias ll="ls -l"
 alias la="ls -a"
 alias lla="ls -la"
-alias pc="pbcopy < "
+
+# git
+alias g="git" && complete -o default -o nospace -F _git g
 alias gs="git status"
+alias ga="git add" && complete -o default -o nospace -F _git_add ga 
+alias gd="git diff" && complete -o default -o nospace -F _git_diff gd 
+alias gg="git grep"
+
+#other
+alias pc="pbcopy < "
 alias untar="tar -zxvf"
 alias ipnb="workon ipython && cd ~/ipnbs && ipython notebook --pylab inline"
-alias alert="notify"
 
 # highlighting
 alias hl="pbpaste | highlight --font=Consolas --font-size=30 --syntax=python -O rtf | pbcopy"
+
+alias workon=workon_wrapper
 
 if [[ -a ~/.local_aliases ]]; then
     source ~/.local_aliases

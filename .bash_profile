@@ -1,4 +1,12 @@
-# source ~/etc/git-completion.bash
+# BASH_COMPLETION ADDITIONS
+if [ -f /opt/local/etc/profile.d/bash_completion.sh ]; then
+    . /opt/local/etc/profile.d/bash_completion.sh
+fi
+
+if [ -f `brew --prefix`/etc/bash_completion ]; then
+    . `brew --prefix`/etc/bash_completion
+fi
+
 source ~/.dotfiles/.functions.bash
 source ~/.dotfiles/.aliases
 source ~/.dotfiles/.prompt
@@ -12,16 +20,6 @@ export CFLAGS=-Qunused-arguments
 export CPPFLAGS=-Qunused-arguments
 
 export PATH="~/bin:$PATH"
-
-# BASH_COMPLETION ADDITIONS
-if [ -f /opt/local/etc/profile.d/bash_completion.sh ]; then
-    . /opt/local/etc/profile.d/bash_completion.sh
-fi
-
-if [ -f `brew --prefix`/etc/bash_completion ]; then
-    . `brew --prefix`/etc/bash_completion
-fi
-
 export HISTIGNORE='  *'
 eval "$(hub alias -s)"
 
@@ -30,4 +28,9 @@ source /usr/local/bin/virtualenvwrapper.sh
 
 if [[ -a ~/.local_settings ]]; then
     source ~/.local_settings
+fi
+
+last_venv=$(cat ~/.last_venv.txt)
+if [ $last_venv ]; then
+    workon $last_venv
 fi

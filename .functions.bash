@@ -6,7 +6,7 @@ function mcd {
     mkdir $1 && cd $1
 }
 
-function notify {
+function alert {
     local usage="Usage: notify [title] message"
     local title=''
     local msg=''
@@ -36,8 +36,23 @@ function hls () {
     pbpaste | highlight --font=Consolas --font-size=30 --syntax=$1 -O rtf | pbcopy
 }
 
-function whendone() {
+function notify() {
     date
     time "$@"
-    notify 'Finished task!' "$*"
+    alert 'Finished task!' "$*"
+}
+
+function psgrep() {
+    ps wup $(pgrep -f $*)
+}
+
+# Do this to avoid infinite loop of references
+unalias workon 2> /dev/null
+function workon_wrapper() {
+    workon $@
+    retval=$?
+    if [ "$@" ] && [ $retval -eq 0 ]; then
+         echo "$@" > ~/.last_venv.txt
+    fi
+    return $retval
 }
