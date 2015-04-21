@@ -1,9 +1,12 @@
 [core]
-    editor = /usr/bin/vim
+    editor = /usr/local/bin/vim
+	excludesfile = /Users/josh/.gitignore_global
 [user]
     name = Josh Palay
     email = jpalay@adharmonics.com
 [alias]
     co = checkout
     cob = checkout -b
+    b = branch
+    s = status
     ec = config --global -e
