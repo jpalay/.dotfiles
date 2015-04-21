@@ -31,6 +31,7 @@ __generate_prompt() {
   local PS1_POST="$(color "\n{cyan}\u{clear}@{bold}\h{clear}$ ")"
 
   __git_ps1 "${PS1_PRE}" "${PS1_POST}"
+  export PS1='\[\e]1;\W\a\e]2;\u@\h\a\]'"$PS1"
 }
 
 _format_codes=(
