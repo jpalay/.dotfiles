@@ -18,7 +18,6 @@ Plugin 'Raimondi/delimitMate'
 Plugin 'tpope/vim-surround'
 Plugin 'othree/html5.vim'
 Plugin 'octol/vim-cpp-enhanced-highlight'
-Plugin 'Lokaltog/powerline'
 Plugin 'gregsexton/MatchTag'
 Plugin 'pangloss/vim-javascript'
 Plugin 'klen/python-mode'
@@ -41,9 +40,11 @@ if has("autocmd")
     au BufRead,BufNewFile *.pde set filetype=c
     au BufRead,BufNewFile *.c.txt set filetype=c
     au BufRead,BufNewFile *.tex nnoremap <leader>s :w<CR>:!tex_to_pdf<CR><CR>
+    au BufRead,BufNewFile *.sql nnoremap <leader>e :w<CR>:!cat % \| grep -v ^-- \| grep -v ^\s*$ && echo && mysql --defaults-group-suffix=rm2 --table < %<CR>
     autocmd! BufReadPost,BufNewFile * call SetupEnvironment()
     autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
 endif
+
 
 " Set colorscheme
 if has("gui_running")
@@ -125,7 +126,7 @@ set visualbell
 set noerrorbells
 set nobackup
 set pastetoggle=<F2>
-set colorcolumn=80 " Colored column at 80 chars
+set colorcolumn=90 " Colored column at 80 chars
 set laststatus=2
 set foldmethod=syntax
 set nofoldenable
@@ -227,6 +228,33 @@ function! TogglePurple()
     endif
 endfunction
 command Purple call TogglePurple()
+
+function! TextEnableCodeSnip(filetype,start,end,textSnipHl) abort
+  let ft=toupper(a:filetype)
+  let group='textGroup'.ft
+  if exists('b:current_syntax')
+    let s:current_syntax=b:current_syntax
+    " Remove current syntax definition, as some syntax files (e.g. cpp.vim)
+    " do nothing if b:current_syntax is defined.
+    unlet b:current_syntax
+  endif
+  execute 'syntax include @'.group.' syntax/'.a:filetype.'.vim'
+  try
+    execute 'syntax include @'.group.' after/syntax/'.a:filetype.'.vim'
+  catch
+  endtry
+  if exists('s:current_syntax')
+    let b:current_syntax=s:current_syntax
+  else
+    unlet b:current_syntax
+  endif
+  execute 'syntax region textSnip'.ft.'
+  \ matchgroup='.a:textSnipHl.'
+  \ start="'.a:start.'" end="'.a:end.'"
+  \ contains=@'.group
+endfunction
+
+au FileType python call TextEnableCodeSnip('sql', "''' -- sql", "'''", 'SpecialComment')
 
 try 
   source ~/.local_vimrc
