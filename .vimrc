@@ -126,7 +126,7 @@ set visualbell
 set noerrorbells
 set nobackup
 set pastetoggle=<F2>
-set colorcolumn=90 " Colored column at 80 chars
+set colorcolumn=90 " Colored column at 90 chars
 set laststatus=2
 set foldmethod=syntax
 set nofoldenable
@@ -175,9 +175,10 @@ let g:pymode_indent = 0
 let g:pymode_syntax_space_errors = 0
 let g:pymode_rope_complete_on_dot = 0
 let g:pymode_trim_whitespaces = 0
+let g:pymode_options_max_line_length = 90
 " E731 - do not assign a lambda expression, use a def
 " E309 - blank line below class definitions
-let g:pymode_lint_ignore = "E731,E309,C901,"
+let g:pymode_lint_ignore = "E731,E309,E501,C901,"
 nnoremap <leader>l :PymodeLint<CR>
 
 " indentLine options
@@ -211,11 +212,11 @@ endfunction
 function! CursorPing()
     set cursorline cursorcolumn
     redraw
-    sleep 50m
+    sleep 200m
     set nocursorline nocursorcolumn
 endfunction
 
-nmap <C-Space> :call CursorPing()<CR>
+nnoremap <leader><Space> :call CursorPing()<CR>
 
 let g:is_purple = 0
 function! TogglePurple()
