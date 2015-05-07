@@ -25,9 +25,6 @@ Plugin 'hynek/vim-python-pep8-indent'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'Yggdroot/indentLine'
 
- " Apparently necessary for powerline
-set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
-
 if $TERM == "xterm-256color"
     set t_Co=256
 endif
@@ -91,12 +88,6 @@ function! DoWindowSwap()
     "Hide and open so that we aren't prompted and keep history
     exe 'hide buf' markedBuf 
 endfunction
-
-" Set cursor shape
-if &term=~"^xterm"
-    let &t_SI .= "\<Esc>]50;CursorShape=1\x7"
-    let &t_EI .= "\<Esc>]50;CursorShape=0\x7"
-endif
 
 let mapleader=","
 nnoremap ; :
