@@ -178,7 +178,9 @@ let g:pymode_trim_whitespaces = 0
 let g:pymode_options_max_line_length = 90
 " E731 - do not assign a lambda expression, use a def
 " E309 - blank line below class definitions
-let g:pymode_lint_ignore = "E731,E309,E501,C901,"
+" E501 - 80 character limit
+" E701 - multiple statements on one line
+let g:pymode_lint_ignore = "E731,E309,E501,E701,C901,"
 nnoremap <leader>l :PymodeLint<CR>
 
 " indentLine options
