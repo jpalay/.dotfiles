@@ -214,7 +214,7 @@ endfunction
 function! CursorPing()
     set cursorline cursorcolumn
     redraw
-    sleep 200m
+    sleep 400m
     set nocursorline nocursorcolumn
 endfunction
 
