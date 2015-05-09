@@ -15,7 +15,7 @@ alias grep="egrep"
 alias fwd="sudo ipfw add 100 fwd 127.0.0.1,8000 tcp from any to any 80 in"
 alias phttp="python -m SimpleHTTPServer"
 alias tidy="tidy -config ~/.tidy"
-alias sbp="source ~/.bash_profile"
+alias sbp="source ~/.bashrc"
 
 # ls
 alias ll="ls -l"

@@ -25,6 +25,8 @@ Plugin 'hynek/vim-python-pep8-indent'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'Yggdroot/indentLine'
 
+call vundle#end()
+
 if $TERM == "xterm-256color"
     set t_Co=256
 endif
