@@ -169,6 +169,7 @@ let g:pymode_syntax_space_errors = 0
 let g:pymode_rope_complete_on_dot = 0
 let g:pymode_trim_whitespaces = 0
 let g:pymode_options_max_line_length = 90
+let g:pymode_motion = 0
 " E731 - do not assign a lambda expression, use a def
 " E309 - blank line below class definitions
 " E501 - 80 character limit
