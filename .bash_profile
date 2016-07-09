@@ -7,7 +7,8 @@
 #     . `brew --prefix`/etc/bash_completion
 # fi
 
-VIRTUALENV_SCRIPT=/usr/local/bin/virtualenvwrapper.sh
+VIRTUALENV_SCRIPT=/usr/bin/virtualenvwrapper.sh
+TERMINAL=urxvt
 
 if [[ -a ~/.local_settings ]]; then
     source ~/.local_settings
@@ -15,19 +16,13 @@ fi
 
 source ~/.dotfiles/.functions.bash
 source ~/.dotfiles/.aliases
-# source ~/.dotfiles/.prompt
+source ~/.dotfiles/.prompt
 
 # Load RVM into a shell session *as a function*
 # [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" 
 
-# export PYTHONSTARTUP="$HOME/.pyrc"
-
-export CFLAGS=-Qunused-arguments
-export CPPFLAGS=-Qunused-arguments
-
 export PATH="~/bin:$PATH"
 export HISTIGNORE='  *'
-# eval "$(hub alias -s)"
 
 export WORKON_HOME=$HOME/.virtualenvs
 source $VIRTUALENV_SCRIPT

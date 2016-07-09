@@ -6,15 +6,11 @@ alias qwerty="echo \"LOL qwerty sux\""
 alias asdf=qwerty
 
 # programs
-alias del="rmtrash"
 alias vmi="vim"
-alias chr="open -a /Applications/Google\ Chrome.app"
 alias grep="egrep"
 
 # port forwarding :o
-alias fwd="sudo ipfw add 100 fwd 127.0.0.1,8000 tcp from any to any 80 in"
-alias phttp="python -m SimpleHTTPServer"
-alias tidy="tidy -config ~/.tidy"
+alias phttp="python -m http.server"
 alias sbp="source ~/.bashrc"
 
 # ls
@@ -29,13 +25,9 @@ alias ga="git add" && complete -o default -o nospace -F _git_add ga
 alias gd="git diff" && complete -o default -o nospace -F _git_diff gd 
 alias gg="git grep"
 
-#other
-alias pc="pbcopy < "
+# other
 alias untar="tar -zxvf"
-alias ipnb="workon ipython && cd ~/ipnbs && ipython notebook --pylab inline"
-
-# highlighting
-alias hl="pbpaste | highlight --font=Consolas --font-size=30 --syntax=python -O rtf | pbcopy"
+# alias ipnb="workon ipython && cd ~/ipnbs && ipython notebook --pylab inline"
 
 alias workon=workon_wrapper
 

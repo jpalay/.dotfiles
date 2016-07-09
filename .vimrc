@@ -1,13 +1,11 @@
 " Vundle setup
 set nocompatible
-filetype on
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#rc()
+call vundle#begin()
 
 " Plugins
 Plugin 'gmarik/Vundle.vim'
-Plugin 'flazz/vim-colorschemes'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'kien/ctrlp.vim'
 Plugin 'nvie/vim-togglemouse'
@@ -26,6 +24,7 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'Yggdroot/indentLine'
 
 call vundle#end()
+filetype on
 
 if $TERM == "xterm-256color"
     set t_Co=256
@@ -42,25 +41,23 @@ if has("autocmd")
     au BufRead,BufNewFile *.sql nnoremap <leader>e :w<CR>:!cat % \| grep -v ^-- \| grep -v ^\s*$ && echo && mysql --defaults-group-suffix=rm2 --table < %<CR>
     autocmd! BufReadPost,BufNewFile * call SetupEnvironment()
     autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+    au BufRead,BufNewFile *.js setlocal ts=2 sts=2 sw=2
+    au BufRead,BufNewFile *.jsx setlocal ts=2 sts=2 sw=2
 endif
 
 
 " Set colorscheme
 if has("gui_running")
-    set guifont=Consolas:h11
-    set background=light
+    set guifont=Ubuntu\ Mono\ 12
+    set background=dark
     colorscheme solarized
-    set guicursor+=a:blinkon0
+    " set guicursor+=a:blinkon0
     " Remove left scrollbar on vspilt window
     set go-=L
     " Remove right scrollbar
     set guioptions-=r
-else
-    " let g:solarized_termcolors=256
-    let g:solarized_visibility = "high"
-    let g:solarized_contrast = "high"
-    set background=light
-    colorscheme solarized
+    set guioptions-=m
+    set guioptions-=T
 endif
 
 highlight link GitGutterAdd DiffAdd
@@ -180,16 +177,9 @@ nnoremap <leader>l :PymodeLint<CR>
 " indentLine options
 let g:indentLine_char = '¦'
 
-" Copy/paste to/from clipboard
-function! s:FuckingCopyTheTextPlease() " {{{2
-  let old_z = @z
-  normal! gv"zy
-  call system('pbcopy', @z)
-  let @z = old_z
-endfunction " }}}2
-
-noremap <leader>p :silent! set paste<CR>"*p:set nopaste<CR>
-vnoremap <silent> <leader>y :<c-u>call <SID>FuckingCopyTheTextPlease()<cr>
+nnoremap <leader>p "+p
+vnoremap <silent> <leader>y "+y
+nnoremap <silent> <leader>y "+y
 
 highlight MatchParen cterm=underline,bold ctermbg=none ctermfg=none
 

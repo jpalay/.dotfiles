@@ -1,4 +1,4 @@
-source /usr/local/etc/bash_completion.d/git-prompt.sh
+source /usr/share/git/git-prompt.sh
 PROMPT_COMMAND=__generate_prompt
 
 __generate_prompt() {
