@@ -92,6 +92,20 @@ let mapleader=","
 nnoremap ; :
 syntax on
 
+" disable scrolling
+map <ScrollWheelUp> <nop>
+map <S-ScrollWheelUp> <nop>
+map <C-ScrollWheelUp> <nop>
+map <ScrollWheelDown> <nop>
+map <S-ScrollWheelDown> <nop>
+map <C-ScrollWheelDown> <nop>
+map <ScrollWheelLeft> <nop>
+map <S-ScrollWheelLeft> <nop>
+map <C-ScrollWheelLeft> <nop>
+map <ScrollWheelRight> <nop>
+map <S-ScrollWheelRight> <nop>
+map <C-ScrollWheelRight> <nop>
+
 set showmatch		" Show matching brackets.
 set ignorecase		" Do case insensitive matching
 set smartcase      " Do smart case matching
@@ -106,7 +120,7 @@ set autoindent
 set copyindent
 set number
 set shiftround " (un)indent to nearest tabstop
-set mouse=a
+set mouse-=a
 set history=1000
 set undolevels=1000
 set wildignore=*.cmi,*.cmo,*.mid,*.pyo,*.pyc,*.ctxt,*.jar,*.jpg,*.jpeg,*.png
