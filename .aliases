@@ -2,8 +2,13 @@
 alias aoeuhtns="echo \"OMG you Dvorak genius\""
 alias aoeusnth=aoeuhtns
 alias aoeu=aoeuhtns
-alias qwerty="echo \"LOL qwerty sux\""
-alias asdf=qwerty
+
+# Unfortunately I need this alias to switch between keyboard layouts
+# alias qwerty="echo \"LOL qwerty sux\""
+# alias asdf=qwerty
+
+alias qwerty="setxkbmap -layout us; xmodmap -e \"keycode 133 = Escape\""
+alias dvorak="setxkbmap -layout us -variant dvorak; xmodmap -e \"keycode 133 = Escape\""
 
 # programs
 alias vmi="vim"
