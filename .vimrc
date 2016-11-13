@@ -42,13 +42,14 @@ if has("autocmd")
     au BufRead,BufNewFile *.sql nnoremap <leader>e :w<CR>:!cat % \| grep -v ^-- \| grep -v ^\s*$ && echo && mysql --defaults-group-suffix=rm2 --table < %<CR>
     autocmd! BufReadPost,BufNewFile * call SetupEnvironment()
     autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+    autocmd FileType javascript set shiftwidth=2 | set softtabstop=2 | set tabstop=2
 endif
 
 
 " Set colorscheme
 if has("gui_running")
     set guifont=Consolas:h11
-    set background=light
+    set background=dark
     colorscheme solarized
     set guicursor+=a:blinkon0
     " Remove left scrollbar on vspilt window
@@ -59,7 +60,7 @@ else
     " let g:solarized_termcolors=256
     let g:solarized_visibility = "high"
     let g:solarized_contrast = "high"
-    set background=light
+    set background=dark
     colorscheme solarized
 endif
 
@@ -95,6 +96,7 @@ let mapleader=","
 nnoremap ; :
 syntax on
 
+set grepprg=grep\ -nH\ $*
 set showmatch		" Show matching brackets.
 set ignorecase		" Do case insensitive matching
 set smartcase      " Do smart case matching
@@ -119,7 +121,7 @@ set visualbell
 set noerrorbells
 set nobackup
 set pastetoggle=<F2>
-set colorcolumn=90 " Colored column at 90 chars
+set colorcolumn=80 " Colored column at 90 chars
 set laststatus=2
 set foldmethod=syntax
 set nofoldenable
@@ -148,6 +150,9 @@ nnoremap <leader>\ :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
 nnoremap <leader>] <C-]>
 nnoremap <leader>. :CtrlPTag<CR>
 
+" latex
+nnoremap <leader>c <leader>ll
+
 " Ctrl-P options
 nnoremap <leader>b :CtrlPBuffer<CR>
 let g:ctrlp_map = '<leader>t'
@@ -166,9 +171,10 @@ let g:user_emmet_expandabbr_key = '<leader>f'
 "pymode options
 let g:pymode_indent = 0
 let g:pymode_syntax_space_errors = 0
+let g:pymode_rope = 0
 let g:pymode_rope_complete_on_dot = 0
 let g:pymode_trim_whitespaces = 0
-let g:pymode_options_max_line_length = 90
+" let g:pymode_options_max_line_length = 90
 let g:pymode_motion = 0
 " E731 - do not assign a lambda expression, use a def
 " E309 - blank line below class definitions
@@ -196,6 +202,7 @@ highlight MatchParen cterm=underline,bold ctermbg=none ctermfg=none
 match Error "[^\x00-\x7F]"
 highlight Error ctermbg=126 ctermfg=White
 
+filetype plugin on
 filetype plugin indent on
 
 function! SetupEnvironment()
@@ -252,6 +259,7 @@ function! TextEnableCodeSnip(filetype,start,end,textSnipHl) abort
 endfunction
 
 au FileType python call TextEnableCodeSnip('sql', "''' -- sql", "'''", 'SpecialComment')
+au FileType python call TextEnableCodeSnip('sql', "\u''' -- sql", "'''", 'SpecialComment')
 
 try 
   source ~/.local_vimrc
