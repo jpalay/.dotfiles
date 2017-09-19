@@ -21,8 +21,9 @@ Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'gregsexton/MatchTag'
 Plugin 'pangloss/vim-javascript'
 Plugin 'klen/python-mode'
+Plugin 'sirtaj/vim-openscad'
 Plugin 'hynek/vim-python-pep8-indent'
-Plugin 'airblade/vim-gitgutter'
+" Plugin 'airblade/vim-gitgutter'
 Plugin 'Yggdroot/indentLine'
 
 call vundle#end()
@@ -38,8 +39,10 @@ if has("autocmd")
     au BufRead,BufNewFile *.c nnoremap <leader>s :wa<CR>:!make<CR>
     au BufRead,BufNewFile *.pde set filetype=c
     au BufRead,BufNewFile *.c.txt set filetype=c
+    au BufRead,BufNewFile *.ino set filetype=cpp
     au BufRead,BufNewFile *.tex nnoremap <leader>s :w<CR>:!tex_to_pdf<CR><CR>
     au BufRead,BufNewFile *.sql nnoremap <leader>e :w<CR>:!cat % \| grep -v ^-- \| grep -v ^\s*$ && echo && mysql --defaults-group-suffix=rm2 --table < %<CR>
+    au BufEnter /private/tmp/crontab.* setl backupcopy=yes
     autocmd! BufReadPost,BufNewFile * call SetupEnvironment()
     autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
     autocmd FileType javascript set shiftwidth=2 | set softtabstop=2 | set tabstop=2
@@ -101,6 +104,7 @@ set showmatch		" Show matching brackets.
 set ignorecase		" Do case insensitive matching
 set smartcase      " Do smart case matching
 set incsearch		" Incremental search
+set nohlsearch
 set hidden             " Hide buffers when they are abandoned
 set backspace=indent,eol,start
 set expandtab
@@ -155,6 +159,7 @@ nnoremap <leader>c <leader>ll
 
 " Ctrl-P options
 nnoremap <leader>b :CtrlPBuffer<CR>
+let g:python_host_prog="/Users/josh/.virtualenvs/neovim/bin/python"
 let g:ctrlp_map = '<leader>t'
 let g:ctrlp_prompt_mappings = {
     \ 'AcceptSelection("e")': ['<c-t>'],

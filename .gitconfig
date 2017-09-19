@@ -3,7 +3,7 @@
 	excludesfile = /Users/josh/.gitignore_global
 [user]
     name = Josh Palay
-    email = jpalay@adharmonics.com
+    email = joshpalay@gmail.com
 [alias]
     co = checkout
     cob = checkout -b
