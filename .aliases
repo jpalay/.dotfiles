@@ -7,8 +7,7 @@ alias asdf=qwerty
 
 # programs
 alias del="rmtrash"
-alias vmi="nvim"
-alias vim="nvim"
+alias vmi="vim"
 alias chr="open -a /Applications/Google\ Chrome.app"
 alias skim="open -a /Applications/Skim.app"
 alias ftmute="printf \"p *(char*)(void(*)())AudioDeviceDuck=0xc3\nq\" | lldb -n FaceTime"
@@ -27,22 +26,28 @@ alias lla="ls -la"
 
 # git
 alias g="git" && complete -o default -o nospace -F _git g
+alias gi="git" && complete -o default -o nospace -F _git g
 alias gs="git status"
 alias ga="git add" && complete -o default -o nospace -F _git_add ga 
 alias gd="git diff" && complete -o default -o nospace -F _git_diff gd 
+alias gdh="git diff HEAD^" && complete -o default -o nospace -F _git_diff gd 
+alias gb="git branch"
+alias gca="git commit --amend --reuse-message HEAD"
 alias gg="git grep"
+alias wimc="git ci-status --author=jpalay --branch=origin/joshpalay-master -10"
 
 #other
 alias pc="pbcopy < "
 alias untar="tar -zxvf"
 alias ipnb="workon ipython && cd ~/ipnbs && ipython notebook"
 alias 181="echo_and_run cd /Users/josh/Dropbox/spring2017/cs181/cs181-s17-jpalay/p3"
+alias examples="cd $CODEZ/asana2 && tools/dev/start_server.py --target //luna-ui:examples_app"
+alias shrug="echo -n '¯\_(ツ)_/¯'  | pbcopy"
+alias files_open="echo_and_run sudo lsof -n | cut -f1 -d' ' | uniq -c | sort | tail"
+alias fetch_timeline="echo_and_run git fetch origin timeline-master:timeline-master"
+alias fetch_boards="echo_and_run git fetch origin boards-master:boards-master"
+alias fetch_master="echo_and_run git fetch origin joshpalay-master:joshpalay-master"
+alias fetch_nm="echo_and_run git fetch origin next-master:next-master"
 
 # highlighting
 alias hl="pbpaste | highlight --font=Consolas --font-size=30 --syntax=python -O rtf | pbcopy"
-
-alias workon=workon_wrapper
-
-if [[ -a ~/.local_aliases ]]; then
-    source ~/.local_aliases
-fi
