@@ -1,0 +1,56 @@
+autoload -Uz compinit
+compinit
+
+export JANUARY_EMAIL='josh.palay@january.com'
+export DEBTSY_EMAIL='josh.palay@january.com'
+export GIT_USERNAME='jpalay'
+
+DOTFILES=$HOME/.dotfiles
+
+source $DOTFILES/zsh/prompt.zsh
+source $DOTFILES/zsh/functions.zsh
+source $DOTFILES/.aliases
+
+path=(
+    "/opt/homebrew/bin"
+    "/Applications/Sublime Text.app/Contents/SharedSupport/bin/opt/homebrew/bin"
+    "/Users/`whoami`/bin"
+    "/Users/`whoami`/.local/bin"
+    $PATH
+)
+
+PATH="${(j.:.)path}"
+
+
+#############################
+##                         ##
+##     NVM SETUP           ##
+##                         ##
+#############################
+export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+
+##############################
+###                        ###
+### -begin-gt-completions- ###
+###                        ###
+##############################
+# yargs command completion script
+#
+# Installation: gt completion >> ~/.zshrc
+#    or gt completion >> ~/.zprofile on OSX.
+#
+_gt_yargs_completions()
+{
+  local reply
+  local si=$IFS
+  IFS=$'
+' reply=($(COMP_CWORD="$((CURRENT-1))" COMP_LINE="$BUFFER" COMP_POINT="$CURSOR" gt --get-yargs-completions "${words[@]}"))
+  IFS=$si
+  _describe 'values' reply
+}
+compdef _gt_yargs_completions gt
+###-end-gt-completions-###
+

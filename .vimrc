@@ -6,6 +6,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#rc()
 
 " Plugins
+Plugin 'iamcco/markdown-preview.nvim'
 Plugin 'gmarik/Vundle.vim'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'altercation/vim-colors-solarized'
@@ -49,23 +50,23 @@ if has("autocmd")
 endif
 
 
-" Set colorscheme
-if has("gui_running")
-    set guifont=Consolas:h11
-    set background=dark
-    colorscheme solarized
-    set guicursor+=a:blinkon0
-    " Remove left scrollbar on vspilt window
-    set go-=L
-    " Remove right scrollbar
-    set guioptions-=r
-else
-    " let g:solarized_termcolors=256
-    let g:solarized_visibility = "high"
-    let g:solarized_contrast = "high"
-    set background=dark
-    colorscheme solarized
-endif
+" " Set colorscheme
+" if has("gui_running")
+"     set guifont=Consolas:h11
+"     set background=dark
+"     colorscheme solarized
+"     set guicursor+=a:blinkon0
+"     " Remove left scrollbar on vspilt window
+"     set go-=L
+"     " Remove right scrollbar
+"     set guioptions-=r
+" else
+"     " let g:solarized_termcolors=256
+"     let g:solarized_visibility = "high"
+"     let g:solarized_contrast = "high"
+"     set background=dark
+"     colorscheme solarized
+" endif
 
 highlight link GitGutterAdd DiffAdd
 highlight link GitGutterDelete DiffDelete
@@ -148,6 +149,8 @@ nnoremap <silent> <leader>wp :call DoWindowSwap()<CR>
 nnoremap <leader>j o<Esc>
 nnoremap <leader>J O<Esc>
 nnoremap <leader>x /.\{81,}<CR>
+nnoremap <tab> %
+vnoremap <tab> %
 
 " ctags
 nnoremap <leader>\ :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
